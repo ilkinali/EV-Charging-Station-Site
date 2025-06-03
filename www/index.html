@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChargeFinder ⚡</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+  <script>
+    Paddle.Setup({ vendor: 123456 }); // Buraya öz vendor ID-ni yaz
+  </script>
+</head>
+<body>
+  <header>
+    <h1 data-translate="title">ChargeFinder ⚡</h1>
+    <div class="controls">
+      <select id="languageSelector">
+        <option value="az">Azərbaycan</option>
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+        <option value="ru">Русский</option>
+      </select>
+      <button id="toggleMode">🌙</button>
+    </div>
+  </header>
+
+  <nav class="legal-menu">
+    <a href="#terms" data-translate="termsLink">İstifadə Şərtləri</a>
+    <a href="#privacy" data-translate="privacyLink">Məxfilik</a>
+    <a href="#refund" data-translate="refundLink">Qaytarma</a>
+  </nav>
+
+  <div class="google-login">
+    <div id="g_id_onload"
+         data-client_id="332899016010-1jqlrmo7ngj8mj9733atmpffn8rmeit8.apps.googleusercontent.com"
+         data-callback="handleGoogleSignIn"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-size="large"></div>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <input type="text" id="searchInput" data-translate="searchPlaceholder" placeholder="Məkan daxil edin..." />
+      <button id="searchButton">🔍 <span data-translate="planRouteButton">Axtar</span></button>
+
+      <label for="distanceSelector" data-translate="distanceFilterLabel">Məsafə Filtri (KM):</label>
+      <select id="distanceSelector">
+        <option value="10">10 KM</option>
+        <option value="20" selected>20 KM</option>
+        <option value="30">30 KM</option>
+        <option value="50" class="premium-option">50 KM</option>
+        <option value="100" class="premium-option">100 KM</option>
+      </select>
+
+      <button id="premiumButton" class="hidden" data-translate="becomePremium">Premium ol ⭐</button>
+
+      <div id="resultsCount">🔌 Tapıldı 100 stansiya</div>
+      <div id="spinner" class="spinner hidden"></div>
+
+      <div class="analytics" id="analyticsPanel">
+        <h3 data-translate="analyticsTitle">Analitik Panel 📊</h3>
+        <p data-translate="searchCount">Axtarışlar: <span id="searchCount">0</span></p>
+      </div>
+    </aside>
+
+    <main class="map-container">
+      <div id="map"></div>
+    </main>
+  </div>
+
+  <!-- Hüquqi bölmələr sayta daxil edilib -->
+  <section id="terms" class="legal-section">
+    <h2 data-translate="termsLink">İstifadə Şərtləri</h2>
+    <p data-translate="termsContent">Bu platformanı istifadə etməklə razılaşırsınız ki, xidmət yalnız fərdi istifadə üçündür və texniki problemlərə görə məsuliyyət daşımırıq.</p>
+  </section>
+
+  <section id="privacy" class="legal-section">
+    <h2 data-translate="privacyLink">Məxfilik Siyasəti</h2>
+    <p data-translate="privacyContent">Biz yalnız adınızı, e-poçtunuzu və şəkilinizi toplayırıq. Bu məlumatlar üçüncü tərəflərlə paylaşılmır.</p>
+  </section>
+
+  <section id="refund" class="legal-section">
+    <h2 data-translate="refundLink">Qaytarma Siyasəti</h2>
+    <p data-translate="refundContent">Premium alındıqdan 14 gün ərzində istifadə edilməyibsə, tam qaytarma mümkündür. Əlaqə üçün: support@clickto.es</p>
+  </section>
+
+  <footer>
+    <p data-translate="footerText">ChargeFinder © 2025</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
